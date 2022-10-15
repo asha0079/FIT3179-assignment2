@@ -1,0 +1,71 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 600,
+    "title": "World CO2 EMISSION",
+    "data": {
+      "url": "https://raw.githubusercontent.com/asha0079/FIT3179-Week9/main/Data/CO2Emission_LifeExp.csv"
+    },
+    "params": [
+        {
+          "name": "Population_Above",
+          "value": 0,
+          "bind": {
+            "input": "range",
+            "min": 0,
+            "max": 100000000,
+            "step": 1000000,
+            "name": "Minimum Population: "
+          }
+        }
+      ],
+    "transform": [
+      {"filter": "datum.CO2Emissions > 0"},
+      {"filter": "datum.LifeExpectancy > 0"},
+      {"filter": "datum.Percapita > 0"},
+      {"filter": "datum.Population > Population_Above"},
+      {
+        "calculate": "datum.Percapita * 10000",
+        "as": "Emission per 10,000 Population"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "Emission per 10,000 Population",
+        "type": "quantitative",
+        "title": "Emission per 10,000 Population",
+        "axis": {"tickCount": 4},
+        "scale": {"type": "log", "domain": [100, 1000000]}
+      },
+      "y": {
+        "field": "LifeExpectancy",
+        "type": "quantitative",
+        "axis": {"tickCount": 6},
+        "scale": {"type": "log", "domain": [40, 100]}
+      }
+    },
+    "layer": [
+        {
+          "mark": "circle",
+          "encoding": {
+            "size": {
+              "field": "Population",
+              "type": "quantitative",
+              "scale": {
+                "type": "threshold",
+                "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+                "range": [10, 50, 150, 200, 300, 400]
+              },
+              "legend": {"format": ".1s"}
+            },
+            "opacity": {"value": 0.6},
+            "tooltip": [
+              {"field": "Country", "type": "nominal"},
+              {"field": "Emission per 10,000 Population", "type": "quantitative", "format": ","},
+              {"field": "LifeExpectancy", "type": "quantitative", "format": ","},
+              {"field": "Population", "type": "quantitative", "format": ","}
+            ]
+          }
+        }
+      ]
+    }
