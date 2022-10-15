@@ -41,7 +41,7 @@
                     "lookup": "properties.NAME",
                     "from": {
                         "data": {
-                            "url": "https://raw.githubusercontent.com/asha0079/FIT3179-Week9/main/Data/CO2Emission_LifeExp.csv"
+                            "url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/CO2Emission_LifeExp.csv"
                         },
                         "key": "Country",
                         "fields": ["CO2Emissions","Population", "Percapita"]

@@ -4,7 +4,7 @@
     "height": 600,
     "title": "World CO2 EMISSION",
     "data": {
-      "url": "https://raw.githubusercontent.com/asha0079/FIT3179-Week9/main/Data/CO2Emission_LifeExp.csv"
+      "url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/CO2Emission_LifeExp.csv"
     },
     "params": [
         {
@@ -17,12 +17,40 @@
             "step": 1000000,
             "name": "Minimum Population: "
           }
-        }
+        },
+        {
+            "name": "Continent_selection",
+            "bind": {
+              "input": "select",
+              "options": [
+                null,
+                "North America",
+                "South America",
+                "Europe",
+                "Africa",
+                "Asia",
+                "Oceania"
+              ],
+              "labels": [
+                "Show All",
+                "North America",
+                "South America",
+                "Europe",
+                "Africa",
+                "Asia",
+                "Oceania"
+              ],
+              "name": "Continent Selection: "
+            }
+          }
       ],
     "transform": [
       {"filter": "datum.CO2Emissions > 0"},
       {"filter": "datum.LifeExpectancy > 0"},
       {"filter": "datum.Percapita > 0"},
+      {
+        "filter": "Continent_selection == null || datum.continent == Continent_selection"
+      },
       {"filter": "datum.Population > Population_Above"},
       {
         "calculate": "datum.Percapita * 10000",
@@ -58,6 +86,28 @@
               },
               "legend": {"format": ".1s"}
             },
+            "color": {
+                "field": "continent",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "North America",
+                    "South America",
+                    "Europe",
+                    "Africa",
+                    "Asia",
+                    "Oceania"
+                  ],
+                  "range": [
+                    "#377eb8",
+                    "#984ea3",
+                    "#ff7f00",
+                    "#a6cee3",
+                    "#e41a1c",
+                    "#a65628"
+                  ]
+                }
+              },
             "opacity": {"value": 0.6},
             "tooltip": [
               {"field": "Country", "type": "nominal"},
@@ -66,6 +116,33 @@
               {"field": "Population", "type": "quantitative", "format": ","}
             ]
           }
-        }
+        },
+        {
+            "mark": {
+              "type": "text",
+              "align": "right",
+              "baseline": "middle",
+              "dx": -12,
+              "fontSize": 11.5,
+              "fontStyle": "italic"
+            },
+            "encoding": {
+              "text": {"field": "Country", "type": "nominal"},
+              "color": {"value": "black"},
+              "opacity": {
+                "condition": {
+                  "test": "datum['Country'] == 'China' || datum['Country'] == 'Oman' || datum['Country'] == 'Australia' || datum['Country'] == 'Qatar' || datum['Country'] == 'Greenland'",
+                  "value": 1
+                },
+                "value": 0
+              },
+              "tooltip": [
+                {"field": "Country", "type": "nominal"},
+                {"field": "Emission per 10,000 Population", "type": "quantitative", "format": ","},
+                {"field": "LifeExpectancy", "type": "quantitative", "format": ","},
+                {"field": "Population", "type": "quantitative", "format": ","}
+              ]
+            }
+          }
       ]
     }
