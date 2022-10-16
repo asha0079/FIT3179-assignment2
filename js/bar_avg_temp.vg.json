@@ -4,11 +4,20 @@
     "width": 800,
     "height": 400,
     "data": {"url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/annual_temp_change.csv"},
-    "mark": "line",
+    "mark": "bar",
     "transform": [
         {"filter": "datum.Source == 'GISTEMP'"}
       ],
     "encoding": {
+      "color": {
+        "field": "Mean",
+        "type": "quantitative",
+        "scale": {
+            "scheme": "redblue",
+            "reverse": true,
+            "domainMid": 0
+        }
+    },
       "x": {
         "field": "Year", "type": "temporal",
         "axis": {
@@ -24,7 +33,15 @@
             "value": "#ddd"
           }
         }
-      }
+      },
+      "tooltip": [
+        {
+          "field": "Mean",
+          "type": "quantitative",
+          "title": "Average Temp."
+        },
+        {"field": "Year", "timeUnit": "year", "title": "Year"}
+    ]
     }
   }
   

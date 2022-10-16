@@ -22,7 +22,7 @@
         "axis": {"tickCount": 5},
         "scale": {"domain": [0,6]}
         },
-          "tooltip": [
+        "tooltip": [
             {
               "field": "value",
               "type": "quantitative",
@@ -30,6 +30,6 @@
               "format": ".2f"
             },
             {"field": "year", "timeUnit": "year", "title": "Year"}
-          ]
+        ]
     }
 }

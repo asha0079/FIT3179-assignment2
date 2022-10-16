@@ -1,0 +1,38 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Countries With highest increase in CO2 Emissions",
+    "data": {
+      "url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/CO2Emission_LifeExp.csv",
+      "format": {
+        "parse": {
+            "YearlyChange": "number"
+        }
+    }
+    },
+    "transform": [
+      {
+        "window": [{
+          "op": "rank",
+          "as": "rank"
+        }],
+        "sort": [{ "field": "YearlyChange", "order": "descending" }]
+      }, {
+        "filter": "datum.rank <= 10"
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {
+          "field": "YearlyChange",
+          "type": "quantitative",
+          "title": "Increase in CO2 Emissions",
+          "scale": {"domain": [0,20]}
+      },
+      "y": {
+          "field": "Country",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "YearlyChange", "order":"descending"}
+      }
+    }
+  }
