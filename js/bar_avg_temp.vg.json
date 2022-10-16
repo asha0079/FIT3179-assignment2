@@ -1,0 +1,30 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "World's Average Temperature",
+    "width": 800,
+    "height": 400,
+    "data": {"url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/annual_temp_change.csv"},
+    "mark": "line",
+    "transform": [
+        {"filter": "datum.Source == 'GISTEMP'"}
+      ],
+    "encoding": {
+      "x": {
+        "field": "Year", "type": "temporal",
+        "axis": {
+          "tickCount": 10
+        }
+      },
+      "y": {
+        "field": "Mean", "type": "quantitative",
+        "title": "Average Temperature",
+        "axis": {
+          "gridColor": {
+            "condition": {"test": "datum.value === 0", "value": "black"},
+            "value": "#ddd"
+          }
+        }
+      }
+    }
+  }
+  
