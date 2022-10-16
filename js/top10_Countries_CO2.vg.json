@@ -1,13 +1,13 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "World CO2 EMISSION Per Capita (1990 - 2018)",
+    "title": "World CO2 EMISSION Per Capita (1960 - 2018)",
     "params": [
       {
         "name": "Year_selection",
-        "value": 2010,
+        "value": 1960,
         "bind": {
           "input": "range",
-          "min": 1990,
+          "min": 1960,
           "max": 2018,
           "step": 1,
           "name": "Year:  "
@@ -41,12 +41,12 @@
           "field": "value",
           "type": "quantitative",
           "title": "CO2 Emissions",
-          "scale": {"domain": [0,50]}
+          "scale": {"domain": [0,350]}
       },
       "y": {
           "field": "country",
           "type": "nominal",
-          "title": false,
+          "title": null,
           "sort": {"field": "value", "order":"descending"}
       }
     }

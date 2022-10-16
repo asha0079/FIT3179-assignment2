@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "World CO2 EMISSION Per Capita",
+    "title": "World CO2 EMISSION Per Capita (1960 - 2018)",
     "width": 800,
     "height": 400,
     "params": [
