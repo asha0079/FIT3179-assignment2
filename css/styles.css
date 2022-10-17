@@ -1,0 +1,19 @@
+body *{
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+body {
+    background-color: gray;
+}
+
+.page {
+    width: 850px;
+    background-color: lightgray;
+    margin: auto;
+    padding: 50px;
+    padding-top: 35px;
+}

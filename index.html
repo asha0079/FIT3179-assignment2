@@ -1,26 +1,159 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <title>Visualisation 2</title>
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-  
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Import Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
 
 </head>
+
 <body>
-  
-<div id="choropleth_map"></div>
+
+<div class="page">
+
+    <!-- Title -->
+    <div class="row">
+        <h1 class="text-center">CO2 Emissions and Global Climate Change</h1>
+        <p class="fs-6 text-center">
+          Carbon dioxide emissions are the primary driver of global climate change.<br> <br>
+          It's widely recognised that to avoid the worst impacts of <br> climate change, the world needs to urgently reduce emissions. <br> <br>
+          In this visualisation we will look at CO2 Emmisions per Capita <br> 
+          by different Countries over the time and <br>
+          it's affect on the global temperature. 
+        </p>
+    </div>
+    <br>
+    <!-- end Title -->
+
+    <!-- Map -->
+    <div class="row text-center">
+      <div id="choropleth_map"></div>
+      <div style="font-size: 15px"><p>On the Map above the darker the colour the higher the CO2 Emission per Capita.<br> Hover on the map for more details or change the year by slider </p></div>
+    </div>
+    <hr>
+
+    <!-- end Map -->
+
+    <!-- Line Chart of World CO2 Emission -->
+    <div class="row text-center">
+      <div  class="col my-auto" id="line"></div>
+      <div  class="col my-auto" style="font-size: 18px">
+        <p>
+          On the graph on the left we can see the change in Average World's CO2 Emissions. <br>
+          It started from <strong>3.12</strong> in 1960 and went to <strong>4.48</strong> in 2018.
+        </p>
+      </div>
+    </div>
+    <hr>
+
+    <!-- end Line Chart of World CO2 Emission -->
+
+    <!-- Scatter Plot of CO2 Emissions vs Life expectency  -->
+    <div class="row text-center">
+      <div  class="col my-auto" style="font-size: 18px">
+        <p>
+          On the graph on right we can see the CO2 Emissions of all the countries , the life expectency and the Population. <br>
+          We can notice that countries with higher Population tend to have more CO2 Emissions.<br> <br>
+          Change the population and continent to sort of the values.
+        </p>
+      </div>
+      <div  class="col my-auto" id="scatterPlot"></div>
+    </div>
+    <hr>
+
+    <!-- end Scatter Plot of CO2 Emissions vs Life expectency -->
+
+    <!-- Top 10 Bar Chart  -->
+    <div class="row">
+      <div  class="col-6" id="vg_top10Country_CO2Emission"></div>
+      <div  class="col-6" id="vg_top10Country_YearChange"></div>
+    </div>
+    <br>
+    <div class="row text-center" style="font-size: 18px">
+      <p> In the above two graphs we can see the top 10 Countries with <br>Highest CO2 Emmisions and Highest Increase in CO2 Emissions.</p>
+      <p>From 1960 to 1985 <strong>Aruba</strong> was at the top <br> and then <strong>Qatar</strong> maintained the rank 1.</p>
+    </div>
+    <hr>
+
+    <!-- end Top 10 Bar Chart -->
+
+    <!-- Average Temp  -->
+    <div class="row text-center">
+      <div  class="col" id="vg_bar_avg_temp"></div>
+    </div>
+    <hr>
+
+    <!-- end Average Temp  -->
+
+
+    <div class="row text-center" style="font-size: 20px">
+      <p>
+        We can see that with the increase in CO2 Emissions <br> the Average Temperature is also increasing.
+      </p>
+      <br>
+      <p>
+        This is indication of Global Warming and if it's not controlled <br>
+        it will result in more frequent hot days and fewer cool days. <br>
+        The Natural calamities will become more common and <br>more severe leading to major health crisis.
+
+      </p>
+    </div>
+    
+  </div> <!-- end page -->
+
 
 <script type="text/javascript">
 
-  var vg_1 = "js/map.vg.json";
-  vegaEmbed('#choropleth_map', vg_1).then(function(result) {
+  var vg_Map = "js/map1.vg.json";
+  vegaEmbed('#choropleth_map', vg_Map, { "actions": false }).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
+
+  var vg_Line = "js/line.vg.json";
+  vegaEmbed('#line', vg_Line, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var vg_scatterPlot = "js/scatterPlot.vg.json";
+  vegaEmbed('#scatterPlot', vg_scatterPlot, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var vg_top10Country_CO2Emission = "js/top10_Countries_CO2.vg.json";
+  vegaEmbed('#vg_top10Country_CO2Emission', vg_top10Country_CO2Emission, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var vg_top10Country_YearChange = "js/top_Countries_yearly_change.vg.json";
+  vegaEmbed('#vg_top10Country_YearChange', vg_top10Country_YearChange, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var vg_bar_avg_temp = "js/bar_avg_temp.vg.json";
+  vegaEmbed('#vg_bar_avg_temp', vg_bar_avg_temp, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
 </script>
 
 </body>

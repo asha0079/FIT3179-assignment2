@@ -1,6 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "World CO2 EMISSION Per Capita (1960 - 2018)",
+    "title": {"text":"CO2 EMISSION Race by Country", "fontSize":15},
+    "width": "container",
     "params": [
       {
         "name": "Year_selection",
@@ -37,17 +38,42 @@
     ],
     "mark": "bar",
     "encoding": {
+      "color": {
+        "field": "value",
+        "type": "quantitative",
+        "scale": {
+            "scheme": "reds",
+            "domainMid": 20
+        }
+    },
       "x": {
           "field": "value",
           "type": "quantitative",
           "title": "CO2 Emissions",
+          "axis": {"grid": false},
           "scale": {"domain": [0,350]}
       },
       "y": {
           "field": "country",
           "type": "nominal",
           "title": null,
+          "axis": {"grid": false},
           "sort": {"field": "value", "order":"descending"}
-      }
-    }
+      },
+      "tooltip": [
+        {
+          "field": "country",
+          "type": "nominal",
+          "title": "Country"
+        },
+        {
+          "field": "value",
+          "type": "quantitative",
+          "title": "CO2 Emissions"
+        },
+        {"field": "year"}
+    ]
+    },
+    "config": {"view": {"stroke": null}},
+    "background":"lightgray"
   }

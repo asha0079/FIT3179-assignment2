@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
-    "height": 400,
-    "title": "World CO2 EMISSION vs Life Expectancy ",
+    "width": "container",
+    "height": 300,
+    "title": {"text":"CO2 EMISSION vs Life Expectancy", "fontSize":15},
     "data": {
       "url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/CO2Emission_LifeExp.csv"
     },
@@ -62,13 +62,13 @@
         "field": "Emission per 10,000 Population",
         "type": "quantitative",
         "title": "Emission per 10,000 Population",
-        "axis": {"tickCount": 4},
+        "axis": {"tickCount": 4, "grid": false},
         "scale": {"type": "log", "domain": [100, 1000000]}
       },
       "y": {
         "field": "LifeExpectancy",
         "type": "quantitative",
-        "axis": {"tickCount": 6},
+        "axis": {"tickCount": 6, "grid": false},
         "scale": {"type": "log", "domain": [40, 100]}
       }
     },
@@ -131,7 +131,7 @@
               "color": {"value": "black"},
               "opacity": {
                 "condition": {
-                  "test": "datum['Country'] == 'Oman' || datum['Country'] == 'Japan' || datum['Country'] == 'Qatar' || datum['Country'] == 'Greenland'",
+                  "test": "datum['Country'] == 'Oman' || datum['Country'] == 'Qatar'",
                   "value": 1
                 },
                 "value": 0
@@ -144,5 +144,7 @@
               ]
             }
           }
-      ]
-    }
+      ],
+      "config": {"view": {"stroke": null}},
+      "background":"lightgray"
+}

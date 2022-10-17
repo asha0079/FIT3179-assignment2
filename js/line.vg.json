@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "World CO2 EMISSION Per Capita (1960 - 2018)",
-    "width": 800,
-    "height": 400,
+    "title": {"text":"World CO2 EMISSION Per Capita (1960 - 2018)", "fontSize":15},
+    "width": "container",
+    "height": 200,
     "data": {"url": "https://raw.githubusercontent.com/asha0079/FIT3179-assignment2/main/Data/CO2_Emission_Changed.csv"},
     "transform": [
         {"filter": "datum.country=='World'"}
@@ -13,13 +13,13 @@
         "field": "year", 
         "type": "temporal",
         "title": "Year",
-        "axis": {"tickCount": 10}
+        "axis": {"tickCount": 10, "grid": false}
         },
       "y": {
         "field": "value", 
         "type": "quantitative",
         "title": "CO2 Emissions",
-        "axis": {"tickCount": 5},
+        "axis": {"tickCount": 5, "grid": false},
         "scale": {"domain": [0,6]}
         },
         "tooltip": [
@@ -31,5 +31,7 @@
             },
             {"field": "year", "timeUnit": "year", "title": "Year"}
         ]
-    }
+    },
+    "config": {"view": {"stroke": null}},
+    "background":"lightgray"
 }
